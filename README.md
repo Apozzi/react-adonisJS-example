@@ -121,6 +121,9 @@ http://localhost:3333/docs
 ```
 ---
 
+<img width="1516" height="965" alt="Capturar2" src="https://github.com/user-attachments/assets/1b612da0-6b17-4690-bc24-bffc94c5c6c5" />
+
+
 ## 📁 Estrutura do Projeto
 
 ```text
