@@ -1,5 +1,15 @@
 # Sistema de Comissionamento (React + AdonisJS)
 
+<p align="left">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/AdonisJS-220052?style=for-the-badge&logo=AdonisJS&logoColor=white" alt="AdonisJS" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" alt="Vite" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+</p>
+
 Um Sistema de Comissionamento full-stack robusto, moderno, configurado para o desenvolvimento de aplicações web escaláveis. O projeto integra perfeitamente uma API RESTful de alta performance no backend com uma interface de usuário dinâmica e reativa no frontend.
 
 <img width="1882" height="988" alt="Capturar" src="https://github.com/user-attachments/assets/1200903b-e673-4e96-b05d-a84bbcadf6d0" />
