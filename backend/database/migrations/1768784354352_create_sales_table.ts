@@ -17,7 +17,6 @@ export default class extends BaseSchema {
       table.decimal('sale_value', 12, 2).notNullable()
       table.date('sale_date').notNullable()
 
-      // Computed commission fields — stored at sale time
       table.decimal('seller_commission', 10, 2).notNullable().defaultTo(0)
       table.decimal('manager_commission', 10, 2).notNullable().defaultTo(0)
       table.string('seller_rule').nullable()

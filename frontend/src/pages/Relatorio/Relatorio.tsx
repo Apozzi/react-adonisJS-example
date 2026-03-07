@@ -5,7 +5,7 @@ import { sellersService } from '../../services/sellers.service'
 import { useAsync } from '../../hooks/useAsync'
 import Spinner from '../../components/Spinner/Spinner'
 import ErrorMsg from '../../components/ErrorMsg/ErrorMsg'
-import { fmt, fmtShort, inputCls } from '../../utils/format'
+import { formatCurrency, formatCurrencyShort, inputClass } from '../../utils/format'
 import './Relatorio.css'
 
 const PIE_COLORS = ['#c8f542', '#a855f7']
@@ -67,7 +67,7 @@ export default function Relatorio() {
         <div>
           <label className="relatorio-filter-label">Vendedor</label>
           <select
-            className={`${inputCls} relatorio-filter-select`}
+            className={`${inputClass} relatorio-filter-select`}
             style={{ colorScheme: 'dark' }}
             value={filters.sellerId}
             onChange={(e) => setFilters({ ...filters, sellerId: e.target.value })}
@@ -79,7 +79,7 @@ export default function Relatorio() {
         <div>
           <label className="relatorio-filter-label">De</label>
           <input
-            className={inputCls}
+            className={inputClass}
             type="date"
             value={filters.from}
             onChange={(e) => setFilters({ ...filters, from: e.target.value })}
@@ -88,7 +88,7 @@ export default function Relatorio() {
         <div>
           <label className="relatorio-filter-label">Até</label>
           <input
-            className={inputCls}
+            className={inputClass}
             type="date"
             value={filters.to}
             onChange={(e) => setFilters({ ...filters, to: e.target.value })}
@@ -108,8 +108,8 @@ export default function Relatorio() {
           <LineChart data={last30.map((d) => ({ ...d, date: d.date.slice(5) }))}>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
             <XAxis dataKey="date" tick={TICK} tickLine={false} axisLine={false} interval={4} />
-            <YAxis tick={TICK} tickLine={false} axisLine={false} tickFormatter={(v) => fmtShort(v)} />
-            <Tooltip {...TOOLTIP} formatter={(v: any) => [fmt(v), 'Valor']} />
+            <YAxis tick={TICK} tickLine={false} axisLine={false} tickFormatter={(v) => formatCurrencyShort(v)} />
+            <Tooltip {...TOOLTIP} formatter={(v: any) => [formatCurrency(v), 'Valor']} />
             <Line type="monotone" dataKey="totalSales" stroke="#c8f542" strokeWidth={2} dot={false} name="Vendas" />
             <Line type="monotone" dataKey="totalCommission" stroke="#a855f7" strokeWidth={2} dot={false} name="Comissões" />
           </LineChart>
@@ -126,9 +126,9 @@ export default function Relatorio() {
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={ranking} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" horizontal={false} />
-              <XAxis type="number" tick={TICK} tickLine={false} axisLine={false} tickFormatter={(v) => fmtShort(v)} />
+              <XAxis type="number" tick={TICK} tickLine={false} axisLine={false} tickFormatter={(v) => formatCurrencyShort(v)} />
               <YAxis type="category" dataKey="name" tick={TICK} tickLine={false} axisLine={false} width={70} />
-              <Tooltip {...TOOLTIP} formatter={(v: any) => [fmt(v), 'Valor']} />
+              <Tooltip {...TOOLTIP} formatter={(v: any) => [formatCurrency(v), 'Valor']} />
               <Bar dataKey="totalCommission" fill="#c8f542" radius={[0, 6, 6, 0]} name="Comissão" />
             </BarChart>
           </ResponsiveContainer>
@@ -143,11 +143,11 @@ export default function Relatorio() {
                   <Pie data={pieData} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={3} dataKey="value">
                     {pieData.map((_, i) => <Cell key={i} fill={PIE_COLORS[i]} />)}
                   </Pie>
-                  <Tooltip {...TOOLTIP} formatter={(v: any) => [fmt(v), 'Valor']} />
+                  <Tooltip {...TOOLTIP} formatter={(v: any) => [formatCurrency(v), 'Valor']} />
                 </PieChart>
               </ResponsiveContainer>
               <div className="relatorio-pie-center">
-                <p className="relatorio-pie-total-val">{fmtShort(distribution.sellerTotal + distribution.managerTotal)}</p>
+                <p className="relatorio-pie-total-val">{formatCurrencyShort(distribution.sellerTotal + distribution.managerTotal)}</p>
                 <p className="relatorio-pie-total-label">Total</p>
               </div>
             </div>
@@ -155,7 +155,7 @@ export default function Relatorio() {
               {pieData.map((d, i) => (
                 <div key={d.name} className="relatorio-pie-legend-item">
                   <div className="relatorio-pie-legend-color" style={{ background: PIE_COLORS[i] }} />
-                  <div><p className="relatorio-pie-legend-name">{d.name}</p><p className="relatorio-pie-legend-val">{fmt(Number(d.value))}</p></div>
+                  <div><p className="relatorio-pie-legend-name">{d.name}</p><p className="relatorio-pie-legend-val">{formatCurrency(Number(d.value))}</p></div>
                 </div>
               ))}
             </div>

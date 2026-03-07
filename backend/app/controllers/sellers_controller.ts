@@ -25,7 +25,6 @@ export default class SellersController {
   async store({ request, response }: HttpContext) {
     const data = await request.validateUsing(createSellerValidator)
 
-    // Validate manager exists if provided
     if (data.managerId) {
       const manager = await Seller.find(data.managerId)
       if (!manager) {

@@ -1,10 +1,10 @@
-export const fmt = (v: number | undefined | null) =>
+export const formatCurrency = (v: number | undefined | null) =>
   (v ?? 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 
-export const fmtShort = (v: number) =>
-  v >= 1000 ? `R$ ${(v / 1000).toFixed(1)}k` : fmt(v)
+export const formatCurrencyShort = (v: number) =>
+  v >= 1000 ? `R$ ${(v / 1000).toFixed(1)}k` : formatCurrency(v)
 
-export const fmtDate = (date: string | Date) => {
+export const formatDate = (date: string | Date) => {
   const d = typeof date === 'string' ? new Date(date) : date
   return d.toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' })
 }
@@ -17,6 +17,6 @@ export function extractErrorMessage(err: unknown): string {
   return 'Erro desconhecido'
 }
 
-export const inputCls =
+export const inputClass =
   'bg-white/5 border border-white/10 text-white rounded-xl px-4 py-2.5 text-sm ' +
   'focus:outline-none focus:border-[#c8f542]/50 transition-all placeholder:text-gray-600'

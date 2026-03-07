@@ -16,7 +16,6 @@ export async function calcCommissions(
   saleValue: number,
   seller: Seller
 ): Promise<CommissionResult> {
-  // Load manager if seller has one
   let manager: Seller | null = null
   if (seller.managerId) {
     manager = await Seller.find(seller.managerId)
@@ -25,12 +24,12 @@ export async function calcCommissions(
   const fmt = (v: number) =>
     v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 
-  // Seller commission
+  // Calculo comissão vendedor
   const sellerFixed = Number(seller.fixedCommission)
   const sellerPercent = saleValue * (Number(seller.percentCommission) / 100)
   const sellerTotal = sellerFixed + sellerPercent
 
-  // Manager commission
+  // Calculo comissão gerente
   const managerFixed = manager ? Number(manager.fixedCommission) : 0
   const managerPercent = manager ? saleValue * (Number(manager.percentCommission) / 100) : 0
   const managerTotal = managerFixed + managerPercent

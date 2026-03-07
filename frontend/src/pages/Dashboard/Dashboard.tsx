@@ -5,7 +5,7 @@ import { useAsync } from '../../hooks/useAsync'
 import StatCard from '../../components/StatCard/StatCard'
 import Spinner from '../../components/Spinner/Spinner'
 import ErrorMsg from '../../components/ErrorMsg/ErrorMsg'
-import { fmt, fmtShort } from '../../utils/format'
+import { formatCurrency, formatCurrencyShort } from '../../utils/format'
 import './Dashboard.css'
 
 const TICK = { fontSize: 11, fill: '#6b7280' }
@@ -26,9 +26,9 @@ export default function Dashboard() {
       </div>
 
       <div className="dashboard-stats-grid">
-        <StatCard label="Total em Vendas"   value={fmtShort(totals.totalSales)}             sub={`${totals.totalCount} vendas`}             icon={ShoppingCart} trend="up"      />
-        <StatCard label="Com. Vendedores"   value={fmtShort(totals.totalSellerCommission)}  sub="total acumulado"                            icon={DollarSign}   trend="up"      />
-        <StatCard label="Com. Gerentes"     value={fmtShort(totals.totalManagerCommission)} sub="total acumulado"                            icon={TrendingUp}   trend="up"      />
+        <StatCard label="Total em Vendas"   value={formatCurrencyShort(totals.totalSales)}             sub={`${totals.totalCount} vendas`}             icon={ShoppingCart} trend="up"      />
+        <StatCard label="Com. Vendedores"   value={formatCurrencyShort(totals.totalSellerCommission)}  sub="total acumulado"                            icon={DollarSign}   trend="up"      />
+        <StatCard label="Com. Gerentes"     value={formatCurrencyShort(totals.totalManagerCommission)} sub="total acumulado"                            icon={TrendingUp}   trend="up"      />
         <StatCard label="Vendedores Ativos" value={String(totals.activeSellers)}            sub={`de ${totals.totalSellers} cadastrados`}    icon={UserCheck}    trend="neutral" />
       </div>
 
@@ -39,8 +39,8 @@ export default function Dashboard() {
             <BarChart data={last7.map((d) => ({ ...d, date: d.date.slice(5) }))} barSize={28}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
               <XAxis dataKey="date" tick={TICK} tickLine={false} axisLine={false} />
-              <YAxis tick={TICK} tickLine={false} axisLine={false} tickFormatter={(v) => fmtShort(v)} />
-              <Tooltip contentStyle={{ background: '#0f1117', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: '#fff', fontSize: 12 }} formatter={(v: any) => [fmt(v), 'Vendas']} />
+              <YAxis tick={TICK} tickLine={false} axisLine={false} tickFormatter={(v) => formatCurrencyShort(v)} />
+              <Tooltip contentStyle={{ background: '#0f1117', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: '#fff', fontSize: 12 }} formatter={(v: any) => [formatCurrency(v), 'Vendas']} />
               <Bar dataKey="total" fill="#c8f542" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -56,7 +56,7 @@ export default function Dashboard() {
               </div>
               <div className="dashboard-seller-info">
                 <p className="dashboard-seller-name">{s.name}</p>
-                <p className="dashboard-seller-sales">{fmtShort(s.totalSales)}</p>
+                <p className="dashboard-seller-sales">{formatCurrencyShort(s.totalSales)}</p>
               </div>
               <Award size={13} className={i === 0 ? 'text-[#c8f542]' : 'text-gray-700'} />
             </div>
@@ -83,9 +83,9 @@ export default function Dashboard() {
                 <td className="dashboard-td-date">{s.saleDate}</td>
                 <td className="dashboard-td-model">{s.vehicleModel}</td>
                 <td className="dashboard-td-seller">{s.seller?.name ?? '—'}</td>
-                <td className="dashboard-td-value">{fmt(s.saleValue)}</td>
-                <td className="dashboard-td-com-seller">{fmt(s.sellerCommission)}</td>
-                <td className="dashboard-td-com-manager">{fmt(s.managerCommission)}</td>
+                <td className="dashboard-td-value">{formatCurrency(s.saleValue)}</td>
+                <td className="dashboard-td-com-seller">{formatCurrency(s.sellerCommission)}</td>
+                <td className="dashboard-td-com-manager">{formatCurrency(s.managerCommission)}</td>
               </tr>
             ))}
           </tbody>

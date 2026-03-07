@@ -8,7 +8,7 @@ import Modal from '../../components/Modal/Modal'
 import Field from '../../components/Field/Field'
 import Spinner from '../../components/Spinner/Spinner'
 import ErrorMsg from '../../components/ErrorMsg/ErrorMsg'
-import { fmt, inputCls, extractErrorMessage } from '../../utils/format'
+import { formatCurrency, inputClass, extractErrorMessage } from '../../utils/format'
 import './Vendedores.css'
 
 export default function Vendedores() {
@@ -92,7 +92,7 @@ export default function Vendedores() {
                 {manager && <p className="vendedores-manager-name">Gerente: {manager.name}</p>}
               </div>
               <div className="vendedores-stats-wrapper">
-                <div><p className="vendedores-stat-val">{fmt(s.fixedCommission)}</p><p className="vendedores-stat-label">Fixo</p></div>
+                <div><p className="vendedores-stat-val">{formatCurrency(s.fixedCommission)}</p><p className="vendedores-stat-label">Fixo</p></div>
                 <div><p className="vendedores-stat-val">{s.percentCommission}%</p><p className="vendedores-stat-label">% Venda</p></div>
               </div>
               <div className="vendedores-actions-wrapper">
@@ -111,17 +111,17 @@ export default function Vendedores() {
       {modal && (
         <Modal title={modal === 'add' ? 'Novo Vendedor' : 'Editar Vendedor'} onClose={() => setModal(null)}>
           <div className="vendedores-form-group">
-            <Field label="Nome"><input className={inputCls} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></Field>
-            <Field label="E-mail"><input className={inputCls} type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></Field>
+            <Field label="Nome"><input className={inputClass} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></Field>
+            <Field label="E-mail"><input className={inputClass} type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></Field>
             <Field label="Gerente (opcional)">
-              <select className={inputCls} value={form.managerId} onChange={(e) => setForm({ ...form, managerId: e.target.value })}>
+              <select className={inputClass} value={form.managerId} onChange={(e) => setForm({ ...form, managerId: e.target.value })}>
                 <option value="">Nenhum (é gerente)</option>
                 {managers.filter((m) => m.id !== editing?.id).map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}
               </select>
             </Field>
             <div className="vendedores-form-grid">
-              <Field label="Comissão Fixa (R$)"><input className={inputCls} type="number" min={0} value={form.fixedCommission} onChange={(e) => setForm({ ...form, fixedCommission: Number(e.target.value) })} /></Field>
-              <Field label="% por Venda"><input className={inputCls} type="number" min={0} step={0.1} value={form.percentCommission} onChange={(e) => setForm({ ...form, percentCommission: Number(e.target.value) })} /></Field>
+              <Field label="Comissão Fixa (R$)"><input className={inputClass} type="number" min={0} value={form.fixedCommission} onChange={(e) => setForm({ ...form, fixedCommission: Number(e.target.value) })} /></Field>
+              <Field label="% por Venda"><input className={inputClass} type="number" min={0} step={0.1} value={form.percentCommission} onChange={(e) => setForm({ ...form, percentCommission: Number(e.target.value) })} /></Field>
             </div>
             <div className="vendedores-toggle-wrapper">
               <button onClick={() => setForm({ ...form, active: !form.active })} className={`vendedores-toggle-btn ${form.active ? 'vendedores-toggle-btn-on' : 'vendedores-toggle-btn-off'}`}>

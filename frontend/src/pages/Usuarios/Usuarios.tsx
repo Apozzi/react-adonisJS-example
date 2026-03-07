@@ -7,7 +7,7 @@ import Modal from '../../components/Modal/Modal'
 import Field from '../../components/Field/Field'
 import Spinner from '../../components/Spinner/Spinner'
 import ErrorMsg from '../../components/ErrorMsg/ErrorMsg'
-import { inputCls, extractErrorMessage } from '../../utils/format'
+import { inputClass, extractErrorMessage } from '../../utils/format'
 import './Usuarios.css'
 
 export default function Usuarios() {
@@ -130,15 +130,15 @@ export default function Usuarios() {
         <Modal title="Novo Usuário" onClose={() => setModal(false)}>
           <div className="usuarios-form-group">
             <Field label="Nome completo">
-              <input className={inputCls} placeholder="João Silva" value={form.fullName}
+              <input className={inputClass} placeholder="João Silva" value={form.fullName}
                 onChange={(e) => setForm({ ...form, fullName: e.target.value })} />
             </Field>
             <Field label="E-mail">
-              <input className={inputCls} type="email" placeholder="joao@email.com" value={form.email}
+              <input className={inputClass} type="email" placeholder="joao@email.com" value={form.email}
                 onChange={(e) => { setForm({ ...form, email: e.target.value }); setFormErr('') }} />
             </Field>
             <Field label="Senha">
-              <input className={inputCls} type="password" placeholder="Mínimo 8 caracteres" value={form.password}
+              <input className={inputClass} type="password" placeholder="Mínimo 8 caracteres" value={form.password}
                 onChange={(e) => { setForm({ ...form, password: e.target.value }); setFormErr('') }} />
             </Field>
 

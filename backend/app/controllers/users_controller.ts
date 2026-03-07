@@ -59,7 +59,6 @@ export default class UsersController {
     const user = await User.find(Number(params.id))
     if (!user) return response.notFound({ message: 'User not found' })
 
-    // Prevent self-deletion
     const currentUser = auth.getUserOrFail()
     if (currentUser.id === user.id) {
       return response.forbidden({ message: 'Você não pode deletar sua própria conta.' })

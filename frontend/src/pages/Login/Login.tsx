@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { DollarSign, Eye, EyeOff, AlertCircle } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import Field from '../../components/Field/Field'
-import { inputCls, extractErrorMessage } from '../../utils/format'
+import { inputClass, extractErrorMessage } from '../../utils/format'
 import './Login.css'
 
 export default function Login() {
@@ -43,13 +43,13 @@ export default function Login() {
         <div className="login-form-card">
           <div className="login-form-group">
             <Field label="E-mail">
-              <input className={`${inputCls} w-full`} type="email" placeholder="seu@email.com" value={email}
+              <input className={`${inputClass} w-full`} type="email" placeholder="seu@email.com" value={email}
                 onChange={(e) => { setEmail(e.target.value); setErr('') }}
                 onKeyDown={(e) => e.key === 'Enter' && submit()} />
             </Field>
             <Field label="Senha">
               <div className="login-password-wrapper">
-                <input className={`${inputCls} login-password-input`} type={show ? 'text' : 'password'} placeholder="••••••••"
+                <input className={`${inputClass} login-password-input`} type={show ? 'text' : 'password'} placeholder="••••••••"
                   value={pass} onChange={(e) => { setPass(e.target.value); setErr('') }}
                   onKeyDown={(e) => e.key === 'Enter' && submit()} />
                 <button onClick={() => setShow(!show)} className="login-password-toggle">

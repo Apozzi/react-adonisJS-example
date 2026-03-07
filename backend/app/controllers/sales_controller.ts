@@ -19,9 +19,9 @@ export default class SalesController {
       .orderBy('id', 'desc')
 
     if (sellerId) query.where('seller_id', sellerId)
-    if (from)     query.where('sale_date', '>=', from)
-    if (to)       query.where('sale_date', '<=', to)
-    if (limit)    query.limit(Number(limit))
+    if (from) query.where('sale_date', '>=', from)
+    if (to) query.where('sale_date', '<=', to)
+    if (limit) query.limit(Number(limit))
 
     return await query
   }
@@ -41,7 +41,6 @@ export default class SalesController {
       return response.unprocessableEntity({ errors: [{ message: 'Seller is inactive' }] })
     }
 
-    // Calculate commissions server-side
     const { sellerCommission, managerCommission, sellerRule, managerRule } =
       await calcCommissions(data.saleValue, seller)
 

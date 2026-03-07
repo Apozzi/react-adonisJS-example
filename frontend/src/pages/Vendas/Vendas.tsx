@@ -9,7 +9,7 @@ import Modal from '../../components/Modal/Modal'
 import Field from '../../components/Field/Field'
 import Spinner from '../../components/Spinner/Spinner'
 import ErrorMsg from '../../components/ErrorMsg/ErrorMsg'
-import { fmt, fmtDate, inputCls, extractErrorMessage } from '../../utils/format'
+import { formatCurrency, formatDate, inputClass, extractErrorMessage } from '../../utils/format'
 import './Vendas.css'
 
 export default function Vendas() {
@@ -82,7 +82,7 @@ export default function Vendas() {
 
       <div className="vendas-search-wrapper">
         <Search size={15} className="vendas-search-icon" />
-        <input className={`${inputCls} vendas-search-input`} placeholder="Buscar por vendedor ou veículo..." value={search} onChange={(e) => setSearch(e.target.value)} />
+        <input className={`${inputClass} vendas-search-input`} placeholder="Buscar por vendedor ou veículo..." value={search} onChange={(e) => setSearch(e.target.value)} />
       </div>
 
       <div className="vendas-table-wrapper">
@@ -97,12 +97,12 @@ export default function Vendas() {
           <tbody>
             {filtered.slice(0, 50).map((s) => (
               <tr key={s.id} className="vendas-tr">
-                <td className="vendas-td-date">{fmtDate(s.saleDate)}</td>
+                <td className="vendas-td-date">{formatDate(s.saleDate)}</td>
                 <td className="vendas-td-model">{s.vehicleModel}</td>
                 <td className="vendas-td-seller">{s.seller?.name ?? '—'}</td>
-                <td className="vendas-td-value">{fmt(Number(s.saleValue))}</td>
-                <td className="vendas-td-com-seller">{fmt(Number(s.sellerCommission))}</td>
-                <td className="vendas-td-com-manager">{fmt(Number(s.managerCommission))}</td>
+                <td className="vendas-td-value">{formatCurrency(Number(s.saleValue))}</td>
+                <td className="vendas-td-com-seller">{formatCurrency(Number(s.sellerCommission))}</td>
+                <td className="vendas-td-com-manager">{formatCurrency(Number(s.managerCommission))}</td>
                 <td className="vendas-td-actions">
                   <div className="vendas-actions-wrapper">
                     <button onClick={() => { setDetail(s); setModal('detail') }} className="vendas-action-view"><Eye size={13} /></button>
@@ -120,15 +120,15 @@ export default function Vendas() {
         <Modal title="Registrar Venda" onClose={() => setModal(null)}>
           <div className="vendas-form-group">
             <Field label="Vendedor">
-              <select className={inputCls} value={form.sellerId} onChange={(e) => setForm({ ...form, sellerId: e.target.value })}>
+              <select className={inputClass} value={form.sellerId} onChange={(e) => setForm({ ...form, sellerId: e.target.value })}>
                 <option value="">Selecionar...</option>
                 {(sellers ?? []).map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
               </select>
             </Field>
-            <Field label="Veículo"><input className={inputCls} placeholder="Ex: Civic 2024" value={form.vehicleModel} onChange={(e) => setForm({ ...form, vehicleModel: e.target.value })} /></Field>
+            <Field label="Veículo"><input className={inputClass} placeholder="Ex: Civic 2024" value={form.vehicleModel} onChange={(e) => setForm({ ...form, vehicleModel: e.target.value })} /></Field>
             <div className="vendas-form-grid">
-              <Field label="Valor da Venda (R$)"><input className={inputCls} type="number" min={0} value={form.saleValue || ''} onChange={(e) => setForm({ ...form, saleValue: Number(e.target.value) })} /></Field>
-              <Field label="Data"><input className={inputCls} type="date" value={form.saleDate} onChange={(e) => setForm({ ...form, saleDate: e.target.value })} /></Field>
+              <Field label="Valor da Venda (R$)"><input className={inputClass} type="number" min={0} value={form.saleValue || ''} onChange={(e) => setForm({ ...form, saleValue: Number(e.target.value) })} /></Field>
+              <Field label="Data"><input className={inputClass} type="date" value={form.saleDate} onChange={(e) => setForm({ ...form, saleDate: e.target.value })} /></Field>
             </div>
 
             {previewLoading && <p className="vendas-preview-loading">Calculando comissão...</p>}
@@ -136,8 +136,8 @@ export default function Vendas() {
               <div className="vendas-preview-box">
                 <p className="vendas-preview-title">Prévia do Comissionamento (via API)</p>
                 <div className="vendas-preview-grid">
-                  <div><p className="vendas-preview-label">Comissão Vendedor</p><p className="vendas-preview-value">{fmt(Number(preview.sellerCommission))}</p></div>
-                  <div><p className="vendas-preview-label">Comissão Gerente</p><p className="vendas-preview-value">{fmt(Number(preview.managerCommission))}</p></div>
+                  <div><p className="vendas-preview-label">Comissão Vendedor</p><p className="vendas-preview-value">{formatCurrency(Number(preview.sellerCommission))}</p></div>
+                  <div><p className="vendas-preview-label">Comissão Gerente</p><p className="vendas-preview-value">{formatCurrency(Number(preview.managerCommission))}</p></div>
                 </div>
                 <p className="vendas-preview-rule">{preview.sellerRule}</p>
               </div>
@@ -157,18 +157,18 @@ export default function Vendas() {
         <Modal title="Detalhes da Venda" onClose={() => setModal(null)}>
           <div className="vendas-form-group">
             <div className="vendas-form-grid">
-              {([['Veículo', detail.vehicleModel], ['Data', fmtDate(detail.saleDate)], ['Valor', fmt(Number(detail.saleValue))], ['Vendedor', detail.seller?.name ?? '—']] as [string, string][]).map(([k, v]) => (
+              {([['Veículo', detail.vehicleModel], ['Data', formatDate(detail.saleDate)], ['Valor', formatCurrency(Number(detail.saleValue))], ['Vendedor', detail.seller?.name ?? '—']] as [string, string][]).map(([k, v]) => (
                 <div key={k} className="vendas-detail-box"><p className="vendas-detail-label">{k}</p><p className="vendas-detail-val">{v}</p></div>
               ))}
             </div>
             <div className="vendas-com-seller-box">
               <p className="vendas-com-seller-title">Comissão Vendedor</p>
-              <p className="vendas-com-val">{fmt(Number(detail.sellerCommission))}</p>
+              <p className="vendas-com-val">{formatCurrency(Number(detail.sellerCommission))}</p>
               <p className="vendas-com-rule">{detail.sellerRule}</p>
             </div>
             <div className="vendas-com-mgr-box">
               <p className="vendas-com-mgr-title">Comissão Gerente</p>
-              <p className="vendas-com-val">{fmt(Number(detail.managerCommission))}</p>
+              <p className="vendas-com-val">{formatCurrency(Number(detail.managerCommission))}</p>
               <p className="vendas-com-rule">{detail.managerRule}</p>
             </div>
             <button onClick={() => setModal(null)} className="vendas-close-btn">Fechar</button>

@@ -9,9 +9,8 @@ export default class DashboardController {
    * Returns all aggregated data for the dashboard in one request
    */
   async index({ }: HttpContext) {
-    const sevenDaysAgo  = DateTime.now().minus({ days: 7 }).toISODate()!
+    const sevenDaysAgo = DateTime.now().minus({ days: 7 }).toISODate()!
 
-    // ── Totals ──────────────────────────────────────────────────
     const totals = await db.from('sales').select(
       db.raw('COALESCE(SUM(sale_value), 0) as total_sales'),
       db.raw('COALESCE(SUM(seller_commission), 0) as total_seller_commission'),
@@ -19,11 +18,9 @@ export default class DashboardController {
       db.raw('COUNT(*) as total_count')
     ).first()
 
-    // ── Active sellers count ─────────────────────────────────────
     const [{ count: activeSellers }] = await db.from('sellers').where('active', true).count('* as count')
-    const [{ count: totalSellers }]  = await db.from('sellers').count('* as count')
+    const [{ count: totalSellers }] = await db.from('sellers').count('* as count')
 
-    // ── Last 7 days bar chart ────────────────────────────────────
     const last7Raw = await db
       .from('sales')
       .where('sale_date', '>=', sevenDaysAgo)
@@ -32,7 +29,6 @@ export default class DashboardController {
       .groupBy('sale_date')
       .orderBy('sale_date', 'asc')
 
-    // Build full 7-day map (fill missing days with 0)
     const last7Map: Record<string, number> = {}
     for (let i = 6; i >= 0; i--) {
       const d = DateTime.now().minus({ days: i }).toISODate()!
@@ -46,14 +42,12 @@ export default class DashboardController {
     })
     const last7 = Object.entries(last7Map).map(([date, total]) => ({ date, total }))
 
-    // ── Recent sales (last 10) ───────────────────────────────────
     const recentSales = await Sale.query()
       .preload('seller')
       .orderBy('sale_date', 'desc')
       .orderBy('id', 'desc')
       .limit(10)
 
-    // ── Top sellers by commission ────────────────────────────────
     const topSellers = await db
       .from('sales')
       .join('sellers', 'sales.seller_id', 'sellers.id')
@@ -101,18 +95,16 @@ export default class DashboardController {
    */
   async report({ request }: HttpContext) {
     const { sellerId, from, to } = request.qs()
-    
-    // Determine date range: if not provided, default to last 30 days
+
     const endDate = to || DateTime.now().toISODate()!
     const startDate = from || DateTime.now().minus({ days: 30 }).toISODate()!
 
-    // ── Last 30 days line chart ──────────────────────────────────
     let last30Query = db
       .from('sales')
       .where('sale_date', '>=', startDate)
       .where('sale_date', '<=', endDate)
     if (sellerId) last30Query = last30Query.where('seller_id', sellerId)
-    
+
     const last30Raw = await last30Query
       .select('sale_date')
       .sum('sale_value as total_sales')
@@ -121,7 +113,7 @@ export default class DashboardController {
       .orderBy('sale_date', 'asc')
 
     const last30Map: Record<string, { totalSales: number; totalCommission: number }> = {}
-    // Only fill days in the selected range
+
     let currentDate = DateTime.fromISO(startDate)
     const endDateDt = DateTime.fromISO(endDate)
     while (currentDate <= endDateDt) {
@@ -134,20 +126,19 @@ export default class DashboardController {
         ? r.sale_date.toISOString().split('T')[0]
         : String(r.sale_date).split('T')[0]
       if (last30Map[key]) {
-        last30Map[key].totalSales      = Number(r.total_sales)
+        last30Map[key].totalSales = Number(r.total_sales)
         last30Map[key].totalCommission = Number(r.total_commission)
       }
     })
     const last30 = Object.entries(last30Map).map(([date, v]) => ({ date, ...v }))
 
-    // ── Ranking per seller ───────────────────────────────────────
     let rankingQuery = db
       .from('sales')
       .join('sellers', 'sales.seller_id', 'sellers.id')
       .where('sales.sale_date', '>=', startDate)
       .where('sales.sale_date', '<=', endDate)
     if (sellerId) rankingQuery = rankingQuery.where('sales.seller_id', sellerId)
-    
+
     const ranking = await rankingQuery
       .select('sellers.id', 'sellers.name', 'sellers.active')
       .sum('sales.seller_commission as total_commission')
@@ -157,12 +148,11 @@ export default class DashboardController {
       .orderBy('total_commission', 'desc')
       .limit(8)
 
-    // ── Commission distribution ──────────────────────────────────
     let distQuery = db.from('sales')
       .where('sale_date', '>=', startDate)
       .where('sale_date', '<=', endDate)
     if (sellerId) distQuery = distQuery.where('seller_id', sellerId)
-    
+
     const dist = await distQuery
       .select(
         db.raw('COALESCE(SUM(seller_commission), 0) as seller_total'),
