@@ -1,0 +1,117 @@
+@reference "../../index.css";
+
+.dashboard-container {
+  @apply p-6 flex flex-col gap-6;
+}
+
+.dashboard-title {
+  @apply text-white text-2xl font-bold;
+}
+
+.dashboard-subtitle {
+  @apply text-gray-500 text-sm mt-0.5;
+}
+
+.dashboard-stats-grid {
+  @apply grid grid-cols-2 lg:grid-cols-4 gap-4;
+}
+
+.dashboard-charts-grid {
+  @apply grid grid-cols-1 lg:grid-cols-3 gap-6;
+}
+
+.dashboard-chart-card {
+  @apply lg:col-span-2 bg-[#0f1117] border border-white/8 rounded-2xl p-5;
+}
+
+.dashboard-card-title-mb {
+  @apply text-white font-semibold mb-4;
+}
+
+.dashboard-top-sellers-card {
+  @apply bg-[#0f1117] border border-white/8 rounded-2xl p-5 flex flex-col gap-3;
+}
+
+.dashboard-card-title {
+  @apply text-white font-semibold;
+}
+
+.dashboard-seller-item {
+  @apply flex items-center gap-3;
+}
+
+.dashboard-seller-rank {
+  @apply text-gray-600 text-xs font-bold w-4;
+}
+
+.dashboard-seller-avatar {
+  @apply w-7 h-7 rounded-lg bg-[#c8f542]/10 flex items-center justify-center flex-shrink-0;
+}
+
+.dashboard-seller-initial {
+  @apply text-[#c8f542] text-xs font-bold;
+}
+
+.dashboard-seller-info {
+  @apply flex-1 min-w-0;
+}
+
+.dashboard-seller-name {
+  @apply text-white text-xs font-medium truncate;
+}
+
+.dashboard-seller-sales {
+  @apply text-gray-600 text-xs;
+}
+
+.dashboard-table-card {
+  @apply bg-[#0f1117] border border-white/8 rounded-2xl overflow-hidden;
+}
+
+.dashboard-table-header {
+  @apply px-5 py-4 border-b border-white/8 flex justify-between items-center;
+}
+
+.dashboard-table-count {
+  @apply text-gray-600 text-xs;
+}
+
+.dashboard-table {
+  @apply w-full text-sm;
+}
+
+.dashboard-thead-tr {
+  @apply border-b border-white/5;
+}
+
+.dashboard-th {
+  @apply text-left text-gray-600 text-xs font-medium px-5 py-3;
+}
+
+.dashboard-tr {
+  @apply border-b border-white/4 hover:bg-white/2 transition-all;
+}
+
+.dashboard-td-date {
+  @apply px-5 py-3 text-gray-500 text-xs;
+}
+
+.dashboard-td-model {
+  @apply px-5 py-3 text-white text-xs font-medium;
+}
+
+.dashboard-td-seller {
+  @apply px-5 py-3 text-gray-400 text-xs;
+}
+
+.dashboard-td-value {
+  @apply px-5 py-3 text-white text-xs font-semibold;
+}
+
+.dashboard-td-com-seller {
+  @apply px-5 py-3 text-[#c8f542] text-xs font-medium;
+}
+
+.dashboard-td-com-manager {
+  @apply px-5 py-3 text-purple-400 text-xs font-medium;
+}

@@ -6,6 +6,7 @@ import { useApp } from '../../context/AppContext'
 import Modal from '../../components/Modal/Modal'
 import { Field, Spinner, ErrorMsg } from '../../components/UI'
 import { inputCls, extractErrorMessage } from '../../utils/format'
+import './Usuarios.css'
 
 export default function Usuarios() {
   const { currentUser, showToast } = useApp()
@@ -62,53 +63,53 @@ export default function Usuarios() {
   if (error) return <ErrorMsg message={error} />
 
   return (
-    <div className="p-6 flex flex-col gap-6">
-      <div className="flex items-center justify-between">
+    <div className="usuarios-container">
+      <div className="usuarios-header">
         <div>
-          <h2 className="text-white text-2xl font-bold">Usuários</h2>
-          <p className="text-gray-500 text-sm mt-0.5">Gerencie os acessos ao sistema</p>
+          <h2 className="usuarios-title">Usuários</h2>
+          <p className="usuarios-subtitle">Gerencie os acessos ao sistema</p>
         </div>
         <button onClick={openModal}
-          className="flex items-center gap-2 bg-[#c8f542] text-black font-semibold px-4 py-2.5 rounded-xl hover:bg-[#d4f75e] transition-all text-sm">
+          className="usuarios-new-btn">
           <Plus size={16} /> Novo Usuário
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="usuarios-grid">
         {(users ?? []).map((u) => {
           const isSelf = u.id === currentUser?.id
           const initials = u.fullName?.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()
             ?? u.email?.[0].toUpperCase()
 
           return (
-            <div key={u.id} className="bg-[#0f1117] border border-white/8 rounded-2xl p-6 flex flex-col gap-5 hover:border-white/15 transition-all">
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-4 min-w-0">
-                  <div className="w-12 h-12 rounded-2xl bg-[#c8f542]/15 flex items-center justify-center flex-shrink-0">
-                    <span className="text-[#c8f542] text-lg font-bold">{initials}</span>
+            <div key={u.id} className="usuarios-card">
+              <div className="usuarios-card-header">
+                <div className="usuarios-user-info">
+                  <div className="usuarios-avatar">
+                    <span className="usuarios-avatar-text">{initials}</span>
                   </div>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <p className="text-white font-semibold truncate">{u.fullName ?? '—'}</p>
+                  <div className="usuarios-name-wrapper">
+                    <div className="usuarios-name-row">
+                      <p className="usuarios-name">{u.fullName ?? '—'}</p>
                       {isSelf && (
-                        <span className="bg-[#c8f542]/15 text-[#c8f542] text-xs px-2 py-0.5 rounded-lg flex-shrink-0">Você</span>
+                        <span className="usuarios-tag-self">Você</span>
                       )}
                     </div>
-                    <p className="text-gray-500 text-xs truncate mt-0.5">{u.email}</p>
+                    <p className="usuarios-email">{u.email}</p>
                   </div>
                 </div>
 
                 {!isSelf && (
                   <button onClick={() => confirmRemove(u.id, u.fullName ?? u.email)}
-                    className="p-2 rounded-lg text-gray-600 hover:text-red-400 hover:bg-red-500/10 transition-all flex-shrink-0 cursor-pointer">
+                    className="usuarios-delete-btn">
                     <Trash2 size={15} />
                   </button>
                 )}
               </div>
 
-              <div className="bg-white/4 rounded-xl p-3">
-                <p className="text-gray-500 text-xs">Cadastrado em</p>
-                <p className="text-white font-medium text-sm mt-0.5">
+              <div className="usuarios-info-box">
+                <p className="usuarios-info-label">Cadastrado em</p>
+                <p className="usuarios-info-value">
                   {u.createdAt ? new Date(u.createdAt).toLocaleDateString('pt-BR') : '—'}
                 </p>
               </div>
@@ -118,14 +119,14 @@ export default function Usuarios() {
       </div>
 
       {(users ?? []).length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-600 text-sm">Nenhum usuário encontrado.</p>
+        <div className="usuarios-empty-wrapper">
+          <p className="usuarios-empty-text">Nenhum usuário encontrado.</p>
         </div>
       )}
 
       {modal && (
         <Modal title="Novo Usuário" onClose={() => setModal(false)}>
-          <div className="flex flex-col gap-4">
+          <div className="usuarios-form-group">
             <Field label="Nome completo">
               <input className={inputCls} placeholder="João Silva" value={form.fullName}
                 onChange={(e) => setForm({ ...form, fullName: e.target.value })} />
@@ -140,18 +141,18 @@ export default function Usuarios() {
             </Field>
 
             {formErr && (
-              <p className="text-red-400 text-xs flex items-center gap-1.5">
+              <p className="usuarios-error-msg">
                 <AlertCircle size={12} />{formErr}
               </p>
             )}
 
-            <div className="flex gap-3 pt-2">
+            <div className="usuarios-modal-actions">
               <button onClick={() => setModal(false)}
-                className="flex-1 border border-white/10 text-gray-400 py-2.5 rounded-xl text-sm hover:bg-white/5 transition-all">
+                className="usuarios-cancel-btn">
                 Cancelar
               </button>
               <button onClick={save} disabled={saving}
-                className="flex-1 bg-[#c8f542] text-black font-semibold py-2.5 rounded-xl text-sm hover:bg-[#d4f75e] transition-all disabled:opacity-60">
+                className="usuarios-submit-btn">
                 {saving ? 'Criando...' : 'Criar Usuário'}
               </button>
             </div>
@@ -162,16 +163,16 @@ export default function Usuarios() {
       {deleteModal && (
         <Modal title="Excluir Usuário" onClose={() => setDeleteModal(null)}>
           <div className="flex flex-col gap-4">
-            <p className="text-gray-300 text-sm">
-              Tem certeza que deseja remover o usuário <strong className="text-white">{deleteModal.name}</strong>? Esta ação não poderá ser desfeita.
+            <p className="usuarios-delete-msg">
+              Tem certeza que deseja remover o usuário <strong className="usuarios-delete-highlight">{deleteModal.name}</strong>? Esta ação não poderá ser desfeita.
             </p>
-            <div className="flex gap-3 pt-4">
+            <div className="usuarios-delete-actions">
               <button onClick={() => setDeleteModal(null)}
-                className="flex-1 border border-white/10 text-gray-400 py-2.5 rounded-xl text-sm hover:bg-white/5 transition-all">
+                className="usuarios-cancel-btn">
                 Cancelar
               </button>
               <button onClick={handleRemove} disabled={deleting}
-                className="flex-1 bg-red-500/10 text-red-500 font-semibold py-2.5 rounded-xl text-sm hover:bg-red-500/20 transition-all disabled:opacity-60">
+                className="usuarios-delete-confirm-btn">
                 {deleting ? 'Excluindo...' : 'Excluir'}
               </button>
             </div>

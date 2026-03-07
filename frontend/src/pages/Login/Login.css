@@ -1,42 +1,75 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@reference "../../index.css";
+
+.login-container {
+  @apply min-h-screen bg-[#080a0f] flex flex-col items-center justify-center relative overflow-hidden;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.login-bg-wrapper {
+  @apply absolute inset-0 pointer-events-none;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-glow-top {
+  @apply absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#c8f542]/5 blur-[120px];
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.login-glow-bottom {
+  @apply absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[#c8f542]/4 blur-[140px];
 }
 
-.card {
-  padding: 2em;
+.login-grid-bg {
+  @apply absolute inset-0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
-.read-the-docs {
-  color: #888;
+.login-content-wrapper {
+  @apply relative w-full max-w-sm px-4;
+}
+
+.login-header {
+  @apply text-center mb-10;
+}
+
+.login-logo-box {
+  @apply inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#c8f542] mb-5 shadow-[0_0_40px_rgba(200,245,66,0.3)];
+}
+
+.login-logo-icon {
+  @apply text-black;
+}
+
+.login-title {
+  @apply text-white text-3xl font-bold tracking-tight;
+}
+
+.login-subtitle {
+  @apply text-gray-500 text-sm mt-1;
+}
+
+.login-form-card {
+  @apply bg-[#0f1117] border border-white/10 rounded-2xl p-8 shadow-2xl;
+}
+
+.login-form-group {
+  @apply flex flex-col gap-4;
+}
+
+.login-password-wrapper {
+  @apply relative;
+}
+
+.login-password-input {
+  @apply w-full pr-10;
+}
+
+.login-password-toggle {
+  @apply absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300;
+}
+
+.login-error-msg {
+  @apply text-red-400 text-xs flex items-center gap-1;
+}
+
+.login-submit-btn {
+  @apply mt-2 w-full bg-[#c8f542] text-black font-bold py-3 rounded-xl hover:bg-[#d4f75e] transition-all disabled:opacity-60 shadow-[0_0_20px_rgba(200,245,66,0.2)];
 }

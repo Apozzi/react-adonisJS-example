@@ -7,6 +7,7 @@ import { useAsync } from '../../hooks/useAsync'
 import Modal from '../../components/Modal/Modal'
 import { Field, Spinner, ErrorMsg } from '../../components/UI'
 import { fmt, inputCls, extractErrorMessage } from '../../utils/format'
+import './Vendedores.css'
 
 export default function Vendedores() {
   const { showToast } = useApp()
@@ -60,54 +61,54 @@ export default function Vendedores() {
   if (error) return <ErrorMsg message={error} />
 
   return (
-    <div className="p-6 flex flex-col gap-6">
-      <div className="flex items-center justify-between">
+    <div className="vendedores-container">
+      <div className="vendedores-header">
         <div>
-          <h2 className="text-white text-2xl font-bold">Vendedores</h2>
-          <p className="text-gray-500 text-sm mt-0.5">Regras de comissão por vendedor</p>
+          <h2 className="vendedores-title">Vendedores</h2>
+          <p className="vendedores-subtitle">Regras de comissão por vendedor</p>
         </div>
-        <button onClick={openAdd} className="flex items-center gap-2 bg-[#c8f542] text-black font-semibold px-4 py-2.5 rounded-xl hover:bg-[#d4f75e] transition-all text-sm">
+        <button onClick={openAdd} className="vendedores-new-btn">
           <Plus size={16} /> Novo Vendedor
         </button>
       </div>
 
-      <div className="grid grid-cols-1 gap-4">
+      <div className="vendedores-grid">
         {(sellers ?? []).map((s) => {
           const manager = (sellers ?? []).find((m) => m.id === s.managerId)
           return (
-            <div key={s.id} className={`bg-[#0f1117] border rounded-2xl p-5 flex items-center gap-5 transition-all ${s.active ? 'border-white/8 hover:border-[#c8f542]/20' : 'border-white/4 opacity-50'}`}>
-              <div className="w-11 h-11 rounded-xl bg-[#c8f542]/10 flex items-center justify-center flex-shrink-0">
-                <span className="text-[#c8f542] font-bold text-lg">{s.name?.[0] || '?'}</span>
+            <div key={s.id} className={`vendedores-card ${s.active ? 'vendedores-card-active' : 'vendedores-card-inactive'}`}>
+              <div className="vendedores-avatar">
+                <span className="vendedores-avatar-text">{s.name?.[0] || '?'}</span>
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <p className="text-white font-semibold">{s.name}</p>
-                  {!s.active && <span className="bg-red-500/15 text-red-400 text-xs px-2 py-0.5 rounded-lg">Inativo</span>}
-                  {s.managerId === null && <span className="bg-purple-500/15 text-purple-400 text-xs px-2 py-0.5 rounded-lg">Gerente</span>}
+              <div className="vendedores-info-wrapper">
+                <div className="vendedores-name-row">
+                  <p className="vendedores-name">{s.name}</p>
+                  {!s.active && <span className="vendedores-tag-inactive">Inativo</span>}
+                  {s.managerId === null && <span className="vendedores-tag-manager">Gerente</span>}
                 </div>
-                <p className="text-gray-500 text-xs mt-0.5">{s.email}</p>
-                {manager && <p className="text-gray-600 text-xs mt-0.5">Gerente: {manager.name}</p>}
+                <p className="vendedores-email">{s.email}</p>
+                {manager && <p className="vendedores-manager-name">Gerente: {manager.name}</p>}
               </div>
-              <div className="flex gap-6 text-center flex-shrink-0">
-                <div><p className="text-[#c8f542] font-bold text-sm">{fmt(s.fixedCommission)}</p><p className="text-gray-600 text-xs">Fixo</p></div>
-                <div><p className="text-[#c8f542] font-bold text-sm">{s.percentCommission}%</p><p className="text-gray-600 text-xs">% Venda</p></div>
+              <div className="vendedores-stats-wrapper">
+                <div><p className="vendedores-stat-val">{fmt(s.fixedCommission)}</p><p className="vendedores-stat-label">Fixo</p></div>
+                <div><p className="vendedores-stat-val">{s.percentCommission}%</p><p className="vendedores-stat-label">% Venda</p></div>
               </div>
-              <div className="flex gap-2 flex-shrink-0">
-                <button onClick={() => toggle(s)} className={`p-2 rounded-lg transition-all ${s.active ? 'text-emerald-400 hover:bg-emerald-500/10' : 'text-gray-600 hover:bg-white/5'}`}>
+              <div className="vendedores-actions-wrapper">
+                <button onClick={() => toggle(s)} className={`vendedores-action-btn-toggle ${s.active ? 'vendedores-action-toggle-on' : 'vendedores-action-toggle-off'}`}>
                   {s.active ? <Check size={14} /> : <X size={14} />}
                 </button>
-                <button onClick={() => openEdit(s)} className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/10 transition-all"><Edit2 size={14} /></button>
-                <button onClick={() => remove(s.id)} className="p-2 rounded-lg text-gray-500 hover:text-red-400 hover:bg-red-500/10 transition-all"><Trash2 size={14} /></button>
+                <button onClick={() => openEdit(s)} className="vendedores-action-edit"><Edit2 size={14} /></button>
+                <button onClick={() => remove(s.id)} className="vendedores-action-del"><Trash2 size={14} /></button>
               </div>
             </div>
           )
         })}
-        {(sellers ?? []).length === 0 && <p className="text-center text-gray-600 py-10 text-sm">Nenhum vendedor cadastrado.</p>}
+        {(sellers ?? []).length === 0 && <p className="vendedores-empty-text">Nenhum vendedor cadastrado.</p>}
       </div>
 
       {modal && (
         <Modal title={modal === 'add' ? 'Novo Vendedor' : 'Editar Vendedor'} onClose={() => setModal(null)}>
-          <div className="flex flex-col gap-4">
+          <div className="vendedores-form-group">
             <Field label="Nome"><input className={inputCls} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></Field>
             <Field label="E-mail"><input className={inputCls} type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></Field>
             <Field label="Gerente (opcional)">
@@ -116,19 +117,19 @@ export default function Vendedores() {
                 {managers.filter((m) => m.id !== editing?.id).map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}
               </select>
             </Field>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="vendedores-form-grid">
               <Field label="Comissão Fixa (R$)"><input className={inputCls} type="number" min={0} value={form.fixedCommission} onChange={(e) => setForm({ ...form, fixedCommission: Number(e.target.value) })} /></Field>
               <Field label="% por Venda"><input className={inputCls} type="number" min={0} step={0.1} value={form.percentCommission} onChange={(e) => setForm({ ...form, percentCommission: Number(e.target.value) })} /></Field>
             </div>
-            <div className="flex items-center gap-3">
-              <button onClick={() => setForm({ ...form, active: !form.active })} className={`w-10 h-5 rounded-full transition-all relative ${form.active ? 'bg-[#c8f542]' : 'bg-white/10'}`}>
-                <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-all shadow ${form.active ? 'right-0.5' : 'left-0.5'}`} />
+            <div className="vendedores-toggle-wrapper">
+              <button onClick={() => setForm({ ...form, active: !form.active })} className={`vendedores-toggle-btn ${form.active ? 'vendedores-toggle-btn-on' : 'vendedores-toggle-btn-off'}`}>
+                <span className={`vendedores-toggle-knob ${form.active ? 'vendedores-toggle-knob-on' : 'vendedores-toggle-knob-off'}`} />
               </button>
-              <span className="text-gray-400 text-sm">Vendedor ativo</span>
+              <span className="vendedores-toggle-label">Vendedor ativo</span>
             </div>
-            <div className="flex gap-3 pt-2">
-              <button onClick={() => setModal(null)} className="flex-1 border border-white/10 text-gray-400 py-2.5 rounded-xl text-sm hover:bg-white/5 transition-all">Cancelar</button>
-              <button onClick={save} disabled={saving} className="flex-1 bg-[#c8f542] text-black font-semibold py-2.5 rounded-xl text-sm disabled:opacity-60">
+            <div className="vendedores-modal-actions">
+              <button onClick={() => setModal(null)} className="vendedores-cancel-btn">Cancelar</button>
+              <button onClick={save} disabled={saving} className="vendedores-submit-btn">
                 {saving ? 'Salvando...' : 'Salvar'}
               </button>
             </div>

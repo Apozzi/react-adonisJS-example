@@ -1,42 +1,125 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@reference "../../index.css";
+
+.usuarios-container {
+  @apply p-6 flex flex-col gap-6;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.usuarios-header {
+  @apply flex items-center justify-between;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.usuarios-title {
+  @apply text-white text-2xl font-bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.usuarios-subtitle {
+  @apply text-gray-500 text-sm mt-0.5;
 }
 
-.card {
-  padding: 2em;
+.usuarios-new-btn {
+  @apply flex items-center gap-2 bg-[#c8f542] text-black font-semibold px-4 py-2.5 rounded-xl hover:bg-[#d4f75e] transition-all text-sm;
 }
 
-.read-the-docs {
-  color: #888;
+.usuarios-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5;
+}
+
+.usuarios-card {
+  @apply bg-[#0f1117] border border-white/8 rounded-2xl p-6 flex flex-col gap-5 hover:border-white/15 transition-all;
+}
+
+.usuarios-card-header {
+  @apply flex items-center justify-between gap-3;
+}
+
+.usuarios-user-info {
+  @apply flex items-center gap-4 min-w-0;
+}
+
+.usuarios-avatar {
+  @apply w-12 h-12 rounded-2xl bg-[#c8f542]/15 flex items-center justify-center flex-shrink-0;
+}
+
+.usuarios-avatar-text {
+  @apply text-[#c8f542] text-lg font-bold;
+}
+
+.usuarios-name-wrapper {
+  @apply min-w-0;
+}
+
+.usuarios-name-row {
+  @apply flex items-center gap-2;
+}
+
+.usuarios-name {
+  @apply text-white font-semibold truncate;
+}
+
+.usuarios-tag-self {
+  @apply bg-[#c8f542]/15 text-[#c8f542] text-xs px-2 py-0.5 rounded-lg flex-shrink-0;
+}
+
+.usuarios-email {
+  @apply text-gray-500 text-xs truncate mt-0.5;
+}
+
+.usuarios-delete-btn {
+  @apply p-2 rounded-lg text-gray-600 hover:text-red-400 hover:bg-red-500/10 transition-all flex-shrink-0 cursor-pointer;
+}
+
+.usuarios-info-box {
+  @apply bg-white/4 rounded-xl p-3;
+}
+
+.usuarios-info-label {
+  @apply text-gray-500 text-xs;
+}
+
+.usuarios-info-value {
+  @apply text-white font-medium text-sm mt-0.5;
+}
+
+.usuarios-empty-wrapper {
+  @apply text-center py-12;
+}
+
+.usuarios-empty-text {
+  @apply text-gray-600 text-sm;
+}
+
+.usuarios-form-group {
+  @apply flex flex-col gap-4;
+}
+
+.usuarios-error-msg {
+  @apply text-red-400 text-xs flex items-center gap-1.5;
+}
+
+.usuarios-modal-actions {
+  @apply flex gap-3 pt-2;
+}
+
+.usuarios-cancel-btn {
+  @apply flex-1 border border-white/10 text-gray-400 py-2.5 rounded-xl text-sm hover:bg-white/5 transition-all;
+}
+
+.usuarios-submit-btn {
+  @apply flex-1 bg-[#c8f542] text-black font-semibold py-2.5 rounded-xl text-sm hover:bg-[#d4f75e] transition-all disabled:opacity-60;
+}
+
+.usuarios-delete-msg {
+  @apply text-gray-300 text-sm;
+}
+
+.usuarios-delete-highlight {
+  @apply text-white;
+}
+
+.usuarios-delete-actions {
+  @apply flex gap-3 pt-4;
+}
+
+.usuarios-delete-confirm-btn {
+  @apply flex-1 bg-red-500/10 text-red-500 font-semibold py-2.5 rounded-xl text-sm hover:bg-red-500/20 transition-all disabled:opacity-60;
 }
