@@ -33,12 +33,6 @@ export type ScannedRoutes = {
     'sellers.store': { paramsTuple?: []; params?: {} }
     'sales.store': { paramsTuple?: []; params?: {} }
   }
-  DELETE: {
-    'access_token.destroy': { paramsTuple?: []; params?: {} }
-    'users.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'sellers.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'sales.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-  }
   GET: {
     'profile.show': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
@@ -62,6 +56,12 @@ export type ScannedRoutes = {
     'sales.commission_preview': { paramsTuple?: []; params?: {} }
     'sales.index': { paramsTuple?: []; params?: {} }
     'sales.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+  }
+  DELETE: {
+    'access_token.destroy': { paramsTuple?: []; params?: {} }
+    'users.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'sellers.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'sales.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   PUT: {
     'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

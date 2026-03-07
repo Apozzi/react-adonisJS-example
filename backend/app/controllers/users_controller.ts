@@ -1,6 +1,5 @@
 import User from '#models/user'
 import type { HttpContext } from '@adonisjs/core/http'
-import UserTransformer from '#transformers/user_transformer'
 import vine from '@vinejs/vine'
 
 const createUserValidator = vine.compile(

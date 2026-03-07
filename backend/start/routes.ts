@@ -19,6 +19,18 @@ import { middleware } from '#start/kernel'
 router.post('/auth/login', '#controllers/access_token_controller.store')
 router.post('/auth/signup', '#controllers/new_account_controller.store')
 
+// Swagger Auto Documentation
+import AutoSwagger from 'adonis-autoswagger'
+import swagger from '#config/swagger'
+
+router.get('/swagger', async () => {
+  return AutoSwagger.default.docs(router.toJSON(), swagger)
+})
+
+router.get('/docs', async () => {
+  return AutoSwagger.default.ui('/swagger', swagger)
+})
+
 // ── Protected routes ───────────────────────────────────────────────────────
 
 router

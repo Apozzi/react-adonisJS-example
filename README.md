@@ -111,6 +111,14 @@ node ace test
 ```
 ---
 
+
+## Swagger
+Para acessar a documentação da API:
+```
+http://localhost:3333/docs
+```
+---
+
 ## 📁 Estrutura do Projeto
 
 ```text
