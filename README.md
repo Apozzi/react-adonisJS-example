@@ -1,6 +1,6 @@
 # Sistema de Comissionamento (React + AdonisJS)
 
-Um Sistema de Comissionamento full-stack robusto, moderno e opinativo, configurado para o desenvolvimento de aplicações web escaláveis. O projeto integra perfeitamente uma API RESTful de alta performance no backend com uma interface de usuário dinâmica e reativa no frontend.
+Um Sistema de Comissionamento full-stack robusto, moderno, configurado para o desenvolvimento de aplicações web escaláveis. O projeto integra perfeitamente uma API RESTful de alta performance no backend com uma interface de usuário dinâmica e reativa no frontend.
 
 ## Decisões Arquiteturais e Técnicas
 
