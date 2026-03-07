@@ -2,7 +2,9 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { ShoppingCart, DollarSign, TrendingUp, UserCheck, Award } from 'lucide-react'
 import { dashboardService } from '../../services/dashboard.service'
 import { useAsync } from '../../hooks/useAsync'
-import { StatCard, Spinner, ErrorMsg } from '../../components/UI'
+import StatCard from '../../components/StatCard/StatCard'
+import Spinner from '../../components/Spinner/Spinner'
+import ErrorMsg from '../../components/ErrorMsg/ErrorMsg'
 import { fmt, fmtShort } from '../../utils/format'
 import './Dashboard.css'
 

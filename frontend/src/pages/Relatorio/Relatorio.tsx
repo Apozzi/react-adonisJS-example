@@ -3,7 +3,8 @@ import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Cart
 import { dashboardService } from '../../services/dashboard.service'
 import { sellersService } from '../../services/sellers.service'
 import { useAsync } from '../../hooks/useAsync'
-import { Spinner, ErrorMsg } from '../../components/UI'
+import Spinner from '../../components/Spinner/Spinner'
+import ErrorMsg from '../../components/ErrorMsg/ErrorMsg'
 import { fmt, fmtShort, inputCls } from '../../utils/format'
 import './Relatorio.css'
 

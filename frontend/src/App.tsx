@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar/Sidebar'
 import Topbar from './components/Topbar/Topbar'
 import MainContent from './components/MainContent/MainContent'
 import Toast from './components/Toast/Toast'
-import { Spinner } from './components/UI'
+import Spinner from './components/Spinner/Spinner'
 
 function Shell() {
   const { currentUser, authLoading, toast, clearToast } = useApp()
