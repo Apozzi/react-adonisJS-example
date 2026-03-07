@@ -118,8 +118,12 @@ react-adonisJS-boilerplate/
 ├── backend/                       # API e Lógica de Negócios (AdonisJS)
 │   ├── app/
 │   │   ├── controllers/           # Controladores das requisições HTTP
+│   │   ├── exceptions/            # Tratamento de exceções personalizadas (Exception Handler)
 │   │   ├── middleware/            # Interceptadores (Log, Auth, Validação)
-│   │   └── models/                # Modelos ORM (Lucid)
+│   │   ├── models/                # Modelos ORM (Lucid)
+│   │   ├── services/              # Lógica de negócios centralizada e reutilizável
+│   │   ├── transformers/          # Formatação e transformação de dados de resposta
+│   │   └── validators/            # Esquemas de validação de dados (VineJS)
 │   ├── config/                    # Configurações globais (CORS, Banco, Sessões)
 │   ├── database/                  
 │   │   ├── migrations/            # Versionamento de schema do banco
