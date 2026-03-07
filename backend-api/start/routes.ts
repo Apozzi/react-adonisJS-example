@@ -7,31 +7,42 @@
 |
 */
 
-import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
-import { controllers } from '#generated/controllers'
+import { middleware } from '#start/kernel'
 
-router.get('/', () => {
-  return { hello: 'world' }
-})
+// ── Public routes ──────────────────────────────────────────────────────────
+
+/**
+ * POST /auth/login   → create access token
+ * DELETE /auth/logout → revoke access token
+ */
+router.post('/auth/login', '#controllers/access_token_controller.store')
+router.post('/auth/signup', '#controllers/new_account_controller.store')
+
+// ── Protected routes ───────────────────────────────────────────────────────
 
 router
   .group(() => {
-    router
-      .group(() => {
-        router.post('signup', [controllers.NewAccount, 'store'])
-        router.post('login', [controllers.AccessToken, 'store'])
-        router.post('logout', [controllers.AccessToken, 'destroy']).use(middleware.auth())
-      })
-      .prefix('auth')
-      .as('auth')
 
-    router
-      .group(() => {
-        router.get('/profile', [controllers.Profile, 'show'])
-      })
-      .prefix('account')
-      .as('profile')
-      .use(middleware.auth())
+    // Auth
+    router.delete('/auth/logout', '#controllers/access_token_controller.destroy')
+
+    // Profile
+    router.get('/profile', '#controllers/profile_controller.show')
+
+    // Users
+    router.resource('users', '#controllers/users_controller').apiOnly()
+
+    // Dashboard (aggregated stats — no resourceful routes needed)
+    router.get('/dashboard',        '#controllers/dashboard_controller.index')
+    router.get('/dashboard/report', '#controllers/dashboard_controller.report')
+
+    // Sellers
+    router.resource('sellers', '#controllers/sellers_controller').apiOnly()
+
+    // Sales
+    router.get('/sales/commission-preview', '#controllers/sales_controller.commissionPreview')
+    router.resource('sales', '#controllers/sales_controller').apiOnly().except(['update'])
+
   })
-  .prefix('/api/v1')
+  .use(middleware.auth())

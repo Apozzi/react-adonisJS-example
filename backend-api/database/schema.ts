@@ -32,6 +32,56 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class SaleSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'managerCommission', 'managerRule', 'saleDate', 'saleValue', 'sellerCommission', 'sellerId', 'sellerRule', 'updatedAt', 'vehicleModel'] as const
+  $columns = SaleSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare managerCommission: string
+  @column()
+  declare managerRule: string | null
+  @column.date()
+  declare saleDate: DateTime
+  @column()
+  declare saleValue: string
+  @column()
+  declare sellerCommission: string
+  @column()
+  declare sellerId: number
+  @column()
+  declare sellerRule: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare vehicleModel: string
+}
+
+export class SellerSchema extends BaseModel {
+  static $columns = ['active', 'createdAt', 'email', 'fixedCommission', 'id', 'managerId', 'name', 'percentCommission', 'updatedAt'] as const
+  $columns = SellerSchema.$columns
+  @column()
+  declare active: boolean
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare email: string
+  @column()
+  declare fixedCommission: string
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare managerId: number | null
+  @column()
+  declare name: string
+  @column()
+  declare percentCommission: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class UserSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'updatedAt'] as const
   $columns = UserSchema.$columns

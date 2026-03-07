@@ -1,14 +1,23 @@
-import { AppProvider, useApp } from "./context/AppContext";
-import Login from "./pages/Login/Login";
-import Sidebar from "./components/Sidebar/Sidebar";
-import Topbar from "./components/Topbar/Topbar";
-import MainContent from "./components/MainContent/MainContent";
-import Toast from "./components/Toast/Toast";
+import { AppProvider, useApp } from './context/AppContext'
+import Login from './pages/Login/Login'
+import Sidebar from './components/Sidebar/Sidebar'
+import Topbar from './components/Topbar/Topbar'
+import MainContent from './components/MainContent/MainContent'
+import Toast from './components/Toast/Toast'
+import { Spinner } from './components/UI'
 
 function Shell() {
-  const { currentUser, toast, clearToast } = useApp();
+  const { currentUser, authLoading, toast, clearToast } = useApp()
 
-  if (!currentUser) return <Login />;
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-[#080a0f] flex items-center justify-center">
+        <Spinner />
+      </div>
+    )
+  }
+
+  if (!currentUser) return <Login />
 
   return (
     <div className="min-h-screen bg-[#080a0f] flex" style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}>
@@ -19,7 +28,7 @@ function Shell() {
         <MainContent />
       </div>
     </div>
-  );
+  )
 }
 
 export default function App() {
@@ -27,5 +36,5 @@ export default function App() {
     <AppProvider>
       <Shell />
     </AppProvider>
-  );
+  )
 }

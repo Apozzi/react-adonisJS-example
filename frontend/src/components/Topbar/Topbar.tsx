@@ -32,12 +32,12 @@ export default function Topbar() {
         >
           <div className="w-6 h-6 rounded-lg bg-[#c8f542]/15 flex items-center justify-center">
             <span className="text-[#c8f542] text-xs font-bold">
-              {currentUser?.name[0]}
+              {currentUser?.username?.[0]}
             </span>
           </div>
           <div>
             <p className="text-white text-xs font-medium leading-none">
-              {currentUser?.name}
+              {currentUser?.username}
             </p>
             <p className="text-gray-600 text-xs leading-none mt-0.5">
               {currentUser?.role === "admin" ? "Admin" : "Visualizador"}
