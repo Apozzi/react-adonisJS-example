@@ -2,6 +2,8 @@
 
 Um Sistema de Comissionamento full-stack robusto, moderno, configurado para o desenvolvimento de aplicações web escaláveis. O projeto integra perfeitamente uma API RESTful de alta performance no backend com uma interface de usuário dinâmica e reativa no frontend.
 
+<img width="1882" height="988" alt="Capturar" src="https://github.com/user-attachments/assets/1200903b-e673-4e96-b05d-a84bbcadf6d0" />
+
 ## Decisões Arquiteturais e Técnicas
 
 A arquitetura do projeto foi desenhada visando **produtividade na experiência de desenvolvimento (DX)**, **segurança nativa** e **alta performance** na entrega de requisições. O uso de Node.js no backend aliado ao React no ecossistema Vite permite que ambas as camadas compartilhem a robustez do TypeScript.
