@@ -1,4 +1,4 @@
-import { Menu, Bell } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useApp } from "../../context/AppContext";
 
 export default function Topbar() {
@@ -16,14 +16,6 @@ export default function Topbar() {
       <div className="flex-1" />
 
       <div className="flex items-center gap-3">
-        {/* Bell */}
-        <button
-          className="p-2 rounded-xl text-gray-600 hover:text-white
-            hover:bg-white/6 transition-all relative"
-        >
-          <Bell size={16} />
-          <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-[#c8f542]" />
-        </button>
 
         {/* User badge */}
         <div

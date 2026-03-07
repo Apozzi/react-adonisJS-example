@@ -6,7 +6,11 @@ export const usersService = {
     return api.get<User[]>('/users')
   },
 
-  show(id: number): Promise<User> {
-    return api.get<User>(`/users/${id}`)
+  create(data: { fullName: string | null; email: string; password: string }): Promise<User> {
+    return api.post<User>('/users', data)
+  },
+
+  delete(id: number): Promise<void> {
+    return api.delete(`/users/${id}`)
   },
 }

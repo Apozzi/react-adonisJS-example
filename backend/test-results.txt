@@ -1,0 +1,249 @@
+c[ info ] loading hooks...
+[ info ] generating indexes...
+[ info ] codegen: created 5 file(s)
+[ info ] booting application to run tests...
+
+functional / Authentication (tests\functional\auth.spec.ts)
+  ├ù Signup - deve criar um usu├írio com e-mail e senha v├ílidos (132.26ms)
+  ├ù Signup - n├úo deve permitir cria├º├úo de conta com e-mail j├í existente (44.74ms)
+  ├ù Login - deve autenticar usu├írio corretamente e retornar token (75.63ms)
+  ├ù Login - deve rejeitar credenciais inv├ílidas (36.49ms)
+
+functional / Users Management (tests\functional\users.spec.ts)
+  ÔêÜ Index - listar usu├írios requer estar autenticado (6.64ms)
+  ÔêÜ Index - deve retornar a lista de usu├írios para um admin autenticado (15.39ms)
+  ├ù Store - deve criar um usu├írio corretamente (39.13ms)
+  ├ù Destroy - deve poder excluir um usu├írio (40.42ms)
+ ERRORS 
+
+> Authentication / Signup - deve criar um usu├írio com e-mail e senha v├ílidos
+
+- Expected  - 1
++ Received  + 1
+
+- 201
++ 422
+
+Ôä╣ AssertionError: expected 422 to equal 201
+
+ Ôüâ at Assert.equal (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/assert/build/index.js:69:19)
+ Ôüâ at ApiResponse.assertStatus (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/api-client/build/index.js:196:15)
+ Ôüâ at Object.executor (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/tests/functional/auth.spec.ts:18:14)
+
+   13 Ôöâ        fullName: 'Japa Test Account',
+   14 Ôöâ        email: 'japa_test@email.com',
+   15 Ôöâ        password: 'password123',
+   16 Ôöâ      })
+   17 Ôöâ  
+ ÔØ» 18 Ôöâ      response.assertStatus(201)
+   19 Ôöâ      response.assertBodyContains({
+   20 Ôöâ        message: 'Usu├írio cadastrado com sucesso!',
+   21 Ôöâ        user: {
+   22 Ôöâ          email: 'japa_test@email.com',
+   23 Ôöâ        },
+
+ Ôüâ at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+ Ôüâ at async #wrapTestInTimeout (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:680:4)
+ Ôüâ at async TestRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:710:4)
+ Ôüâ at async Test$1.exec (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:918:3)
+ Ôüâ at async GroupRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:259:4)
+ Ôüâ at async Group$1.exec (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:354:3)
+ Ôüâ at async SuiteRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:1100:4)
+[1/6]ÔöÇ
+
+> Authentication / Signup - n├úo deve permitir cria├º├úo de conta com e-mail j├í existente
+
+- Expected  - 1
++ Received  + 1
+
+- 400
++ 422
+
+Ôä╣ AssertionError: expected 422 to equal 400
+
+ Ôüâ at Assert.equal (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/assert/build/index.js:69:19)
+ Ôüâ at ApiResponse.assertStatus (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/api-client/build/index.js:196:15)
+ Ôüâ at Object.executor (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/tests/functional/auth.spec.ts:40:14)
+
+   35 Ôöâ        fullName: 'Outro Nome',
+   36 Ôöâ        email: 'japa_test@email.com',
+   37 Ôöâ        password: 'password123',
+   38 Ôöâ      })
+   39 Ôöâ  
+ ÔØ» 40 Ôöâ      response.assertStatus(400) // Assumindo que a API retorna BadRequest/ValidationError
+   41 Ôöâ    })
+   42 Ôöâ  
+   43 Ôöâ    test('Login - deve autenticar usu├írio corretamente e retornar token', async ({ client, assert }) => {
+   44 Ôöâ      await User.create({ fullName: 'Japa Test', email: 'japa_test@email.com', password: 'password123' })
+   45 Ôöâ  
+
+ Ôüâ at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+ Ôüâ at async #wrapTestInTimeout (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:680:4)
+ Ôüâ at async TestRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:710:4)
+ Ôüâ at async Test$1.exec (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:918:3)
+ Ôüâ at async GroupRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:259:4)
+ Ôüâ at async Group$1.exec (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:354:3)
+ Ôüâ at async SuiteRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:1100:4)
+[2/6]ÔöÇ
+
+> Authentication / Login - deve autenticar usu├írio corretamente e retornar token
+
+- Expected  - 0
++ Received  + 8
+
+  Object {
++   "data": Object {
++     "token": "oat_MjY.Uk41cEJ2dlRfNlpIbGFZWkp6WlNrc3VVUGFRRHVsa0xmMTJ6bjg3QjI5MzIzNTA4NTY",
+      "user": Object {
++       "createdAt": "2026-03-07T20:30:16.851+00:00",
+        "email": "japa_test@email.com",
++       "fullName": "Japa Test",
++       "id": 19,
++       "initials": "JT",
++       "updatedAt": "2026-03-07T20:30:16.851+00:00",
++     },
+    },
+  }
+
+Ôä╣ AssertionError: expected { data: { ÔÇª(2) } } to contain subset { Object (user) }
+
+ Ôüâ at assert.containsSubset (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/chai/index.js:4116:30)
+ Ôüâ at Assert.containSubset (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/assert/build/index.js:446:19)
+ Ôüâ at Assert.containsSubset (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/assert/build/index.js:453:15)
+ Ôüâ at ApiResponse.assertBodyContains (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/api-client/build/index.js:204:15)
+ Ôüâ at Object.executor (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/tests/functional/auth.spec.ts:52:14)
+
+   47 Ôöâ        email: 'japa_test@email.com',
+   48 Ôöâ        password: 'password123',
+   49 Ôöâ      })
+   50 Ôöâ  
+   51 Ôöâ      response.assertStatus(200)
+ ÔØ» 52 Ôöâ      response.assertBodyContains({ user: { email: 'japa_test@email.com' } })
+   53 Ôöâ      
+   54 Ôöâ      assert.isDefined((response.body() as any).token)
+   55 Ôöâ    })
+   56 Ôöâ  
+   57 Ôöâ    test('Login - deve rejeitar credenciais inv├ílidas', async ({ client }) => {
+
+ Ôüâ at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+ Ôüâ at async #wrapTestInTimeout (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:680:4)
+ Ôüâ at async TestRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:710:4)
+ Ôüâ at async Test$1.exec (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:918:3)
+ Ôüâ at async GroupRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:259:4)
+[3/6]ÔöÇ
+
+> Authentication / Login - deve rejeitar credenciais inv├ílidas
+
+- Expected  - 1
++ Received  + 1
+
+- 400
++ 404
+
+Ôä╣ AssertionError: expected 404 to equal 400
+
+ Ôüâ at Assert.equal (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/assert/build/index.js:69:19)
+ Ôüâ at ApiResponse.assertStatus (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/api-client/build/index.js:196:15)
+ Ôüâ at Object.executor (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/tests/functional/auth.spec.ts:65:14)
+
+   58 Ôöâ      await User.create({ fullName: 'Japa Test', email: 'japa_test@email.com', password: 'password123' })
+   59 Ôöâ  
+   60 Ôöâ      const response = await client.post('/api/auth/login').form({
+   61 Ôöâ        email: 'japa_test@email.com',
+   62 Ôöâ        password: 'wrong_password',
+   63 Ôöâ      })
+   64 Ôöâ  
+ ÔØ» 65 Ôöâ      response.assertStatus(400) 
+   66 Ôöâ    })
+   67 Ôöâ  })
+   68 Ôöâ  
+
+ Ôüâ at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+ Ôüâ at async #wrapTestInTimeout (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:680:4)
+ Ôüâ at async TestRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:710:4)
+ Ôüâ at async Test$1.exec (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:918:3)
+ Ôüâ at async GroupRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:259:4)
+ Ôüâ at async Group$1.exec (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:354:3)
+ Ôüâ at async SuiteRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:1100:4)
+[4/6]ÔöÇ
+
+> Users Management / Store - deve criar um usu├írio corretamente
+
+- Expected  - 7
++ Received  + 1
+
+- Object {
+-   "message": "Usu├írio cadastrado com sucesso!",
+-   "user": Object {
+-     "email": "temp_japa@email.com",
+-     "fullName": "Temp Japa",
+-   },
+- }
++ Object {}
+
+Ôä╣ AssertionError: expected {} to contain subset { ÔÇª(2) }
+
+ Ôüâ at assert.containsSubset (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/chai/index.js:4116:30)
+ Ôüâ at Assert.containSubset (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/assert/build/index.js:446:19)
+ Ôüâ at Assert.containsSubset (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/assert/build/index.js:453:15)
+ Ôüâ at ApiResponse.assertBodyContains (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/api-client/build/index.js:204:15)
+ Ôüâ at Object.executor (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/tests/functional/users.spec.ts:42:14)
+
+   37 Ôöâ        email: 'temp_japa@email.com',
+   38 Ôöâ        password: 'password123',
+   39 Ôöâ      })
+   40 Ôöâ  
+   41 Ôöâ      response.assertStatus(201)
+ ÔØ» 42 Ôöâ      response.assertBodyContains({
+   43 Ôöâ        message: 'Usu├írio cadastrado com sucesso!',
+   44 Ôöâ        user: { fullName: 'Temp Japa', email: 'temp_japa@email.com' }
+   45 Ôöâ      })
+   46 Ôöâ    })
+   47 Ôöâ  
+
+ Ôüâ at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+ Ôüâ at async #wrapTestInTimeout (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:680:4)
+ Ôüâ at async TestRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:710:4)
+ Ôüâ at async Test$1.exec (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:918:3)
+ Ôüâ at async GroupRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:259:4)
+[5/6]ÔöÇ
+
+> Users Management / Destroy - deve poder excluir um usu├írio
+
+- Expected  - 1
++ Received  + 1
+
+- 200
++ 204
+
+Ôä╣ AssertionError: expected 204 to equal 200
+
+ Ôüâ at Assert.equal (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/assert/build/index.js:69:19)
+ Ôüâ at ApiResponse.assertStatus (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/api-client/build/index.js:196:15)
+ Ôüâ at Object.executor (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/tests/functional/users.spec.ts:53:14)
+
+   48 Ôöâ    test('Destroy - deve poder excluir um usu├írio', async ({ client, assert }) => {
+   49 Ôöâ      const tempUsr = await User.create({ fullName: 'To Be Deleted', email: 'temp_japa@email.com', password: 'password123' })
+   50 Ôöâ      
+   51 Ôöâ      const response = await client.delete(`/users/${tempUsr.id}`).loginAs(adminUser)
+   52 Ôöâ  
+ ÔØ» 53 Ôöâ      response.assertStatus(200)
+   54 Ôöâ      response.assertBodyContains({ message: 'Usu├írio removido!' })
+   55 Ôöâ  
+   56 Ôöâ      const stillExists = await User.find(tempUsr.id)
+   57 Ôöâ      assert.isNull(stillExists)
+   58 Ôöâ    })
+
+ Ôüâ at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+ Ôüâ at async #wrapTestInTimeout (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:680:4)
+ Ôüâ at async TestRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:710:4)
+ Ôüâ at async Test$1.exec (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:918:3)
+ Ôüâ at async GroupRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:259:4)
+ Ôüâ at async Group$1.exec (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:354:3)
+ Ôüâ at async SuiteRunner.run (C:/Users/eande/OneDrive/Documentos/GitHub/react-adonisJS-boilerplate/backend/node_modules/@japa/core/build/index.js:1100:4)
+[6/6]ÔöÇ
+
+ FAILED 
+
+Tests  2 passed, 6 failed (8)
+ Time  445ms
