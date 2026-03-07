@@ -5,6 +5,12 @@ import { DateTime } from 'luxon'
 
 export default class DatabaseSeeder extends BaseSeeder {
   async run() {
+    const existingUsers = await db.from('users').count('* as total')
+    if (Number(existingUsers[0].total) > 0) {
+      console.log('✅ Database already seeded, skipping.')
+      return
+    }
+
     // ── 1. Users ────────────────────────────────────────────────
     const hashedPassword = await hash.make('password123')
 

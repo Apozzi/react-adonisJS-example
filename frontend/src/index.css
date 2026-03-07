@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Style select dropdown options */
 select option {
   background-color: #0f1117;
   color: #ffffff;
@@ -18,9 +17,7 @@ select option:hover {
   color: #ffffff;
 }
 
-/* Style date picker calendar icon */
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1) brightness(1.1);
   cursor: pointer;
 }
-

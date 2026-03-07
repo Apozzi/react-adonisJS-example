@@ -10,19 +10,16 @@ import { api } from '../services/api'
 interface ToastState { msg: string; type: 'success' | 'error' }
 
 interface AppContextValue {
-  // auth
   currentUser: User | null
   authLoading: boolean
   login: (email: string, password: string) => Promise<void>
   logout: () => Promise<void>
 
-  // navigation
   page: Page
   setPage: (p: Page) => void
   sideOpen: boolean
   toggleSide: () => void
 
-  // toast
   toast: ToastState | null
   showToast: (msg: string, type: 'success' | 'error') => void
   clearToast: () => void
@@ -37,7 +34,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [sideOpen, setSideOpen] = useState(true)
   const [toast, setToast] = useState<ToastState | null>(null)
 
-  // Restore session on mount
   useEffect(() => {
     const token = getToken()
     if (!token) { setAuthLoading(false); return }
@@ -50,7 +46,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback(async (email: string, password: string) => {
     const res = await authService.login(email, password)
-    console.log('login res:', res) // adiciona isso temporariamente
     setCurrentUser(res.user)
   }, [])
 
@@ -60,9 +55,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setPage('dashboard')
   }, [])
 
-  const toggleSide  = useCallback(() => setSideOpen((v) => !v), [])
-  const showToast   = useCallback((msg: string, type: 'success' | 'error') => setToast({ msg, type }), [])
-  const clearToast  = useCallback(() => setToast(null), [])
+  const toggleSide = useCallback(() => setSideOpen((v) => !v), [])
+  const showToast = useCallback((msg: string, type: 'success' | 'error') => setToast({ msg, type }), [])
+  const clearToast = useCallback(() => setToast(null), [])
 
   return (
     <AppContext.Provider value={{
