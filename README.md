@@ -18,14 +18,14 @@ Um Sistema de Comissionamento full-stack robusto, moderno, configurado para o de
 
 A arquitetura do projeto foi desenhada visando **produtividade na experiência de desenvolvimento (DX)**, **segurança nativa** e **alta performance** na entrega de requisições. O uso de Node.js no backend aliado ao React no ecossistema Vite permite que ambas as camadas compartilhem a robustez do TypeScript.
 
+[Flowchat](https://images.ctfassets.net/23aumh6u8s0i/7kLF7UpW807zR9gnaOW3w7/1d97244017a8c51a8f7f2a2b4aab7f77/MVC-Flow-Chart)
+
 ### Backend (`/backend`)
 *   **Framework**: [AdonisJS v7](https://adonisjs.com/) - Escolhido pela sua arquitetura MVC bem definida, injeção de dependências robusta e ecossistema de pacotes nativos que evitam a fadiga de escolha no ecossistema Node.js. O Adonis dita a melhor forma de se construir as rotas, middlewares e controladores.
 *   **Banco de Dados & ORM**: PostgreSQL gerenciado através do **Lucid ORM** (nativo do Adonis), oferecendo um Query Builder seguro, sistema de migrações (`migrations`) e preenchimento de dados iniciais regulares (`seeders`).
 *   **Autenticação**: Gerenciamento de sessões e autenticação através do `@adonisjs/auth` e políticas rígidas de segurança com `@adonisjs/shield` (proteção CSRF e headers de segurança).
 *   **Validação de Dados**: Validadores de input controlados pelo **VineJS**, que possuem uma performance imbatível frente a validadores mais antigos como Joi/Yup.
 *   **Runtime**: Node.js >= 24.
-
-  <img width="1788" height="1096" alt="MVC-Flow-Chart" src="https://github.com/user-attachments/assets/d690a61a-6cd6-46b1-bfed-19a5e331e455" />
 
 ### Frontend (`/frontend`)
 *   **Ecossistema**: React 19 executado em cima do **Vite**, garantindo inicialização do servidor de desenvolvimento quase instantânea e *Hot Module Replacement* (HMR) performático.
