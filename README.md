@@ -122,7 +122,7 @@ npm run dev
 ```
 
 ## Testes Automatizados:
-A aplicação backend possoui testes funcionais,
+A aplicação backend possui testes funcionais,
 Para rodá-los:
 ```bash
 cd backend
