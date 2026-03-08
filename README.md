@@ -83,6 +83,11 @@ docker compose up --build
 - **Frontend**: Acessível em `http://localhost:5173`
 - **Backend API**: Acessível em `http://localhost:3333`
 
+```
+user: admin@comissoes.com
+senha: password123
+```
+
 #### Opção B: Ambiente Dev Local (Manual)
 
 Se preferir rodar usando seu próprio banco ou instalando as dependências via Node nativamente em seu SO:
@@ -115,14 +120,6 @@ npm install
 npm run dev
 # O Frontend rodará em http://localhost:5173
 ```
-
-## Usuário
-Segue usuário de exemplo
-```
-user: admin@comissoes.com
-senha: password123
-```
----
 
 ## Testes Automatizados:
 A aplicação backend possoui testes funcionais,
