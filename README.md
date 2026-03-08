@@ -25,6 +25,8 @@ A arquitetura do projeto foi desenhada visando **produtividade na experiência d
 *   **Validação de Dados**: Validadores de input controlados pelo **VineJS**, que possuem uma performance imbatível frente a validadores mais antigos como Joi/Yup.
 *   **Runtime**: Node.js >= 24.
 
+  <img width="1788" height="1096" alt="MVC-Flow-Chart" src="https://github.com/user-attachments/assets/d690a61a-6cd6-46b1-bfed-19a5e331e455" />
+
 ### Frontend (`/frontend`)
 *   **Ecossistema**: React 19 executado em cima do **Vite**, garantindo inicialização do servidor de desenvolvimento quase instantânea e *Hot Module Replacement* (HMR) performático.
 *   **Roteamento**: **React Router v7** para controle completo das rotas do lado do cliente e navegação SPA.
