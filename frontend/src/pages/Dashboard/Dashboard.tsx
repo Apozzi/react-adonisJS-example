@@ -5,7 +5,7 @@ import { useAsync } from '../../hooks/useAsync'
 import StatCard from '../../components/StatCard/StatCard'
 import Spinner from '../../components/Spinner/Spinner'
 import ErrorMsg from '../../components/ErrorMsg/ErrorMsg'
-import { formatCurrency, formatCurrencyShort } from '../../utils/format'
+import { formatCurrency, formatCurrencyShort, formatDateYMD } from '../../utils/format'
 import './Dashboard.css'
 
 const TICK = { fontSize: 11, fill: '#6b7280' }
@@ -26,10 +26,10 @@ export default function Dashboard() {
       </div>
 
       <div className="dashboard-stats-grid">
-        <StatCard label="Total em Vendas"   value={formatCurrencyShort(totals.totalSales)}             sub={`${totals.totalCount} vendas`}             icon={ShoppingCart} trend="up"      />
-        <StatCard label="Com. Vendedores"   value={formatCurrencyShort(totals.totalSellerCommission)}  sub="total acumulado"                            icon={DollarSign}   trend="up"      />
-        <StatCard label="Com. Gerentes"     value={formatCurrencyShort(totals.totalManagerCommission)} sub="total acumulado"                            icon={TrendingUp}   trend="up"      />
-        <StatCard label="Vendedores Ativos" value={String(totals.activeSellers)}            sub={`de ${totals.totalSellers} cadastrados`}    icon={UserCheck}    trend="neutral" />
+        <StatCard label="Total em Vendas" value={formatCurrencyShort(totals.totalSales)} sub={`${totals.totalCount} vendas`} icon={ShoppingCart} trend="up" />
+        <StatCard label="Com. Vendedores" value={formatCurrencyShort(totals.totalSellerCommission)} sub="total acumulado" icon={DollarSign} trend="up" />
+        <StatCard label="Com. Gerentes" value={formatCurrencyShort(totals.totalManagerCommission)} sub="total acumulado" icon={TrendingUp} trend="up" />
+        <StatCard label="Vendedores Ativos" value={String(totals.activeSellers)} sub={`de ${totals.totalSellers} cadastrados`} icon={UserCheck} trend="neutral" />
       </div>
 
       <div className="dashboard-charts-grid">
@@ -80,7 +80,7 @@ export default function Dashboard() {
           <tbody>
             {recentSales.map((s) => (
               <tr key={s.id} className="dashboard-tr">
-                <td className="dashboard-td-date">{s.saleDate}</td>
+                <td className="dashboard-td-date">{formatDateYMD(s.saleDate)}</td>
                 <td className="dashboard-td-model">{s.vehicleModel}</td>
                 <td className="dashboard-td-seller">{s.seller?.name ?? '—'}</td>
                 <td className="dashboard-td-value">{formatCurrency(s.saleValue)}</td>

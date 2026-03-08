@@ -9,6 +9,15 @@ export const formatDate = (date: string | Date) => {
   return d.toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' })
 }
 
+export const formatDateYMD = (date: string | Date) => {
+  const d = typeof date === 'string' ? new Date(date) : date
+  if (isNaN(d.getTime())) return typeof date === 'string' ? date : ''
+  const yyyy = d.getFullYear()
+  const mm = String(d.getMonth() + 1).padStart(2, '0')
+  const dd = String(d.getDate()).padStart(2, '0')
+  return `${yyyy}/${mm}/${dd}`
+}
+
 export function extractErrorMessage(err: unknown): string {
   if (!err || typeof err !== 'object') return 'Erro desconhecido'
   const e = err as any
