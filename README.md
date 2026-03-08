@@ -116,6 +116,14 @@ npm run dev
 # O Frontend rodará em http://localhost:5173
 ```
 
+## Usuário
+Segue usuário de exemplo
+```
+user: admin@comissoes.com
+senha: password123
+```
+---
+
 ## Testes Automatizados:
 A aplicação backend possoui testes funcionais,
 Para rodá-los:
