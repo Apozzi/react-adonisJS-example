@@ -19,23 +19,17 @@ router.get('/docs', async () => {
 
 router
   .group(() => {
-    // Auth
     router.delete('/auth/logout', '#controllers/access_token_controller.destroy')
 
-    // Profile
     router.get('/profile', '#controllers/profile_controller.show')
 
-    // Users
     router.resource('users', '#controllers/users_controller').apiOnly()
 
-    // Dashboard
     router.get('/dashboard', '#controllers/dashboard_controller.index')
     router.get('/dashboard/report', '#controllers/dashboard_controller.report')
 
-    // Sellers
     router.resource('sellers', '#controllers/sellers_controller').apiOnly()
 
-    // Sales
     router.get('/sales/commission-preview', '#controllers/sales_controller.commissionPreview')
     router.resource('sales', '#controllers/sales_controller').apiOnly().except(['update'])
 

@@ -6,7 +6,7 @@ export default {
   title: 'Comissionamento API',
   version: '1.0.0',
   description: 'Documentação da API REST do sistema de comissionamento',
-  tagIndex: 1, // Controller routing without api prefix
+  tagIndex: 1,
   productionEnv: 'production',
   info: {
     title: 'Comissionamento API',
